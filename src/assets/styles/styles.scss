@@ -1,0 +1,189 @@
+@import "./variables";
+@import ' ~material-design-icons-iconfont/src/material-design-icons';
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  cursor: pointer;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+span {
+  font-weight: 600;
+}
+
+button,
+input,
+label {
+  &:active,
+  &:focus,
+  &:hover {
+    outline: none;
+  }
+}
+
+button,
+label {
+  cursor: pointer;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.none {
+  display: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.align {
+  align-items: center;
+}
+
+.direction {
+  flex-direction: column;
+}
+
+.text {
+  text-align: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.padding {
+  padding: $padding;
+}
+
+.padding-2 {
+  padding: $padding*2;
+}
+
+.margin {
+  margin: $margin;
+}
+
+.margin-2 {
+  margin: $margin*2;
+}
+
+.border-none {
+  border: none;
+}
+
+.border-radius {
+  border-radius: $radius*2;
+}
+
+.bold-600 {
+  font-weight: 600;
+}
+
+.font-18 {
+  font-size: 18px;
+}
+
+.font-16 {
+  font-size: 16px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.bg-light {
+  background-color: $light;
+}
+
+.bg_dark {
+  background-color: $dark;
+}
+
+.color-white {
+  color: white;
+}
+
+.btn {
+  background-color: $light;
+  color: $white;
+
+  &:hover {
+    background: $dark;
+    cursor: pointer;
+  }
+}
+
+.color-white {
+  color: $white;
+
+  &:hover {
+    color: $dark;
+    cursor: pointer;
+  }
+}
+
+.color-dark {
+  color: $dark;
+  &:hover {
+    color: $white;
+    background: $dark;
+    cursor: pointer;
+  }
+}
+
+.color-light {
+  color: $light;
+
+  &:hover {
+    color: $dark;
+    cursor: pointer;
+  }
+}
+
+.active_color {
+  color: $white !important;
+  background: $dark;
+}
+
+.router-link-active,
+.router-link-exact-active,
+.active__title {
+  color: $dark !important;
+}
