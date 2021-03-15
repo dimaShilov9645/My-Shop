@@ -187,3 +187,44 @@ label {
 .active__title {
   color: $dark !important;
 }
+
+.form-group {
+  display: flex;
+  max-width: 70%;
+  margin: 0 auto;
+
+  .form-control {
+    width: 100%;
+    padding: $padding;
+    margin: $margin;
+    border-radius: $radius*2;
+    border: 1px solid rgba($dark, 0.3);
+    font-size: 18px;
+    color: $dark;
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active{
+      -webkit-box-shadow: 0 0 0 30px white inset !important;
+    }
+    &:-webkit-autofill{
+      -webkit-text-fill-color: $dark !important;
+    }
+    &::placeholder {
+      font-size: 16px;
+      color: rgba($dark, 0.4);
+    }
+    &:focus {
+      border: 1px solid $light;
+    }
+  }
+  label {
+    min-width: 190px;
+    padding: $padding;
+    margin: $margin;
+    text-align: right;
+    font-size: 18px;
+    font-weight: 600;
+    color: $dark;
+  }
+}

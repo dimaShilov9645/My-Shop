@@ -7,6 +7,7 @@ export default {
         })
             .then((products) => {
                 commit('SET_PRODUCTS_TO_STATE', products.data);
+                console.log(products);
                 return products;
             })
             .catch((error) => {

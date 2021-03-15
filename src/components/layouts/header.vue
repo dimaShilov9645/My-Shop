@@ -50,6 +50,7 @@ export default {
     search(value) {
       if (value) {
         this.GET_SEARCH_VALUE_TO_VUEX(value);
+        this.searchValue = '';
         this.$router.push('/catalog')
       }
     },

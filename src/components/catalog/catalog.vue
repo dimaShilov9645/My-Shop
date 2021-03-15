@@ -105,6 +105,7 @@ export default {
       'ADD_TO_CART',
       'GET_CATEGORY',
       'GET_PRODUCTS_PAGE',
+      'GET_SEARCH_VALUE_TO_VUEX'
     ]),
     addToCart(data) {
       this.ADD_TO_CART(data)
@@ -182,6 +183,8 @@ export default {
           return item.name.toLowerCase().includes(value.toLowerCase())
         })
       }
+      this.GET_SEARCH_VALUE_TO_VUEX('')
+      this.GET_CATEGORY('')
       return this.sortedProducts
     }
   },
@@ -190,7 +193,9 @@ export default {
       this.sortProductsBySearchValue(this.SEARCH_VALUE)
     },
     CATEGORY() {
-      this.filtered()
+      if (this.CATEGORY !== '') {
+        this.filtered()
+      }
     },
     SUBCATEGORY() {
       this.filtered()
@@ -205,7 +210,6 @@ export default {
           }
         })
   }
-
 }
 </script>
 
@@ -267,7 +271,6 @@ export default {
       height: 16px;
       border-radius: 50%;
       background: $dark;
-
     }
   }
 }

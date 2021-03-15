@@ -65,11 +65,9 @@ export default {
     },
     paginationBack() {
       this.pageNumber--
-      console.log(this.pageNumber)
     },
     paginationNext() {
       this.pageNumber++
-      console.log(this.pageNumber)
     },
     paginationData() {
       const start = this.pageNumber * this.onThePage, end = start + this.onThePage;
