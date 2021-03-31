@@ -1,85 +1,56 @@
 <template>
-  <div class="absolute flex align between direction menu">
+  <div class="flex align  direction menu">
     <h1
         class="color-light"
-        :class="{active__title: CATEGORY === ''}"
-        @click="activeCategories"
+        :class="{active__title: selectCategory === ''}"
+        @click="selectCategory = '';"
     >
       Categories
     </h1>
-    <div class="w-100" v-for="category in sortedProducts" :key="category.index">
+    <div class="w-100" v-for="category in categoryList" :key="category.index">
       <label class="flex align w-100 border-radius bg-light menu-categories"
-             :class="{bg_dark: CATEGORY === category}">
+             :class="{bg_dark: selectCategory === category}">
         <input class="none" type="radio" name="radio" :value="category" v-model="selectCategory">
-        <p class="absolute padding font-18 color-white">{{ category }}</p>
+        <p class="absolute padding font-18">{{ category }}</p>
       </label>
       <transition name="subcategory-show">
-        <subcategory v-if="CATEGORY === category"/>
+        <subcategory v-if="selectCategory === category"/>
       </transition>
     </div>
   </div>
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 import Subcategory from "@/components/menu/subcategory";
 
 export default {
   name: "menu-categories",
   components: {Subcategory},
-  data() {
-    return {
-      sortedProducts: [],
-      selectCategory: "",
-    }
-  },
   computed: {
-    ...mapGetters([
-      'PRODUCTS',
-      'CATEGORY'
-    ]),
+    ...mapGetters("products", ["categoryList"]),
+    selectCategory: {
+      get () {
+        return this.$store.state.sortedProducts.category
+      },
+      set (value) {
+        this.$store.commit('sortedProducts/SET_CATEGORY', value)
+        this.$store.commit('sortedProducts/SET_SUBCATEGORY', []);
+        this.getSortProducts()
+      }
+    },
   },
   methods: {
-    ...mapActions([
-      'GET_PRODUCTS_FROM_API',
-      'GET_CATEGORY',
-      'GET_SUBCATEGORY'
-    ]),
-    activeCategories() {
-      this.GET_CATEGORY('');
-      this.selectCategory = '';
-      this.GET_SUBCATEGORY('');
-    },
-    filteredByCategories() {
-      this.sortedProducts = this.PRODUCTS.map(product => product.category);
-      this.sortedProducts = [...new Set(this.sortedProducts)]
-      return this.sortedProducts
-    }
-  },
-  watch: {
-    selectCategory: function () {
-      this.GET_CATEGORY(this.selectCategory)
-      this.GET_SUBCATEGORY('')
-    }
-  },
-  mounted() {
-    this.GET_PRODUCTS_FROM_API()
-        .then((response) => {
-          if (response.data) {
-            this.filteredByCategories();
-          }
-        })
-
+    ...mapActions("sortedProducts",["getSubcategory","getSortProducts"]),
   }
-}
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 
 .menu {
-  left: 2%;
-  right: 81%;
-  top: 170px;
+  margin: 90px 20px;
+  min-width: 18%;
 }
 
 .menu-categories {
@@ -89,6 +60,7 @@ export default {
   p {
     text-align: left;
     z-index: 1;
+    color: $white;
   }
 
   &:before {

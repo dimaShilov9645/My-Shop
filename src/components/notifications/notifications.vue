@@ -1,10 +1,10 @@
 <template>
-  <div class="fixed notification">
+  <div class="fixed notification pointer">
     <transition-group
         name="transition-animate"
     >
       <div
-          class="flex align between padding-2 border-radius bg_dark color-white notification__content"
+          class="flex align between padding-2 border-radius bg_dark notification__content"
           v-for="message in messages"
           :key="message.id"
       >
@@ -56,6 +56,7 @@ export default {
   &__content {
     height: 50px;
     margin-bottom: $margin*2;
+    color: $white;
   }
 }
 

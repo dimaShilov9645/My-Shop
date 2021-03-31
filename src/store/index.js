@@ -1,31 +1,51 @@
-import {createApp} from 'vue'
-import {createStore} from 'vuex'
-
-import getters from "@/store/getters/getters";
-import mutations from "@/store/mutations/mutations";
-import apiRequests from "@/store/actions/api-requests"
-import commonActions from "@/store/actions/common-actions"
-
-const actions = {...commonActions, ...apiRequests}
+import { createApp } from "vue";
+import { createStore } from "vuex";
+import products from "@/store/modules/products";
+import sortedProducts from "@/store/modules/sortedProducts";
+import paginationProducts from "@/store/modules/paginationProducts";
+import cart from "@/store/modules/cart";
 
 const store = createStore({
-    state: {
-        products: [],
-        productsPage: [],
-        cart: [],
-        isMobile: false,
-        isDesktop: true,
-        searchValue: '',
-        category: '',
-        subcategory: [],
+  state: {
+    isMobile: false,
+    isDesktop: true,
+  },
+  getters: {
+    IS_MOBILE(state) {
+      return state.isMobile;
     },
-    mutations,
-    actions,
-    getters
+    IS_DESKTOP(state) {
+      return state.isDesktop;
+    },
+  },
+  mutations: {
+    SWITCH_MOBILE: (state) => {
+      state.isMobile = true;
+      state.isDesktop = false;
+    },
+    SWITCH_DESKTOP: (state) => {
+      state.isMobile = false;
+      state.isDesktop = true;
+    },
+  },
+  actions: {
+    SET_MOBILE({ commit }) {
+      commit("SWITCH_MOBILE");
+    },
+    SET_DESKTOP({ commit }) {
+      commit("SWITCH_DESKTOP");
+    },
+  },
+  modules: {
+    products,
+    sortedProducts,
+    paginationProducts,
+    cart,
+  },
 });
 
-const app = createApp({})
+const app = createApp({});
 
-app.use(store)
+app.use(store);
 
 export default store;

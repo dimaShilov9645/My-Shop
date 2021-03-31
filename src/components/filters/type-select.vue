@@ -1,67 +1,56 @@
 <template>
   <div class="relative font-16 type-select">
-    <p
-        class="padding border-radius pointer title"
-        @click="areOptionsVisible = !areOptionsVisible"
-    >
-      {{ selected }}
+    <p class="padding border-radius pointer title" @click="areOptionsVisible = !areOptionsVisible">
+      {{ selectOption }}
     </p>
-    <div
-        class="absolute options"
-        v-if="areOptionsVisible || isExpanded"
-    >
+    <div class="absolute options" v-if="areOptionsVisible">
       <p
           class="m-0 padding border-radius pointer"
           v-for="option in options"
           :key="option.id"
-          @click="selectOption(option)"
-      >
-        {{ option }}
-      </p>
+          @click="selectOption = option"
+      >{{ option }}</p>
     </div>
   </div>
 </template>
 
 <script>
+import {mapActions} from "vuex"
 export default {
   name: "type-select",
   props: {
     options: {
       type: Array,
-      default() {
-        return []
-      }
-    },
-    selected: {
-      type: String,
-      default: ''
-    },
-    isExpanded: {
-      type: Boolean,
-      default: false
+      default: () => []
     }
   },
-  data() {
-    return {
-      areOptionsVisible: false
-    }
+  data: () => ({ 
+    areOptionsVisible: false 
+  }),
+  computed: {
+    selectOption: {
+      get() {
+        return this.$store.state.sortedProducts.type;
+      },
+      set(value) {
+        this.$store.commit('sortedProducts/SET_TYPE', value)
+        this.getSortProducts();
+      },
+    },
   },
   methods: {
-    selectOption(option) {
-      this.$emit('select', option)
-      this.areOptionsVisible = false;
-    },
+     ...mapActions("sortedProducts",["getSortProducts"]),
     hideSelect() {
       this.areOptionsVisible = false;
-    }
+    },
   },
   mounted() {
     document.addEventListener('click', this.hideSelect.bind(this), true)
   },
   beforeCreate() {
     document.removeEventListener('click', this.hideSelect)
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">

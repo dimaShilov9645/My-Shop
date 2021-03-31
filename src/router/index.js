@@ -12,7 +12,7 @@ const routes = [
         component: MainPage,
     },
     {
-        path: '/catalog',
+        path: '/catalog/',
         name: 'catalog',
         component: Catalog,
     },
@@ -38,6 +38,7 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(),
+    //base: process.env.BASE_URL,
     routes
 });
 

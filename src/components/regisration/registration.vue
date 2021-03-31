@@ -67,7 +67,7 @@
             data-required="confirm-password"
             data-invalid-message="Please provide valid confirm password">
       </div>
-      <button type="submit" class="border-none padding-2 margin-2 font-18 border-radius btn btn-primary">Register</button>
+      <button type="submit" class="border-none padding-2 font-18 border-radius btn btn-primary">Register</button>
     </form>
   </div>
 </template>
@@ -80,7 +80,7 @@ export default {
 
 <style lang="scss">
 .registration-wrapper {
-  margin-top: 50px;
+  width: 70%;
 }
 .registration-form {
   background: rgba(#61c85b, 0.1);

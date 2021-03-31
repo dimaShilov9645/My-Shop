@@ -13,6 +13,7 @@ export default {
 <style lang="scss">
 .footer {
   flex: 0 0 auto;
+  
   height: 80px;
   border-top-right-radius: $radius*5;
   border-top-left-radius: $radius*3;

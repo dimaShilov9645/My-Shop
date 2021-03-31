@@ -23,6 +23,7 @@ export default {
       'SET_MOBILE',
       'SET_DESKTOP'
     ]),
+    ...mapActions("products",["getProductsApi"])
   },
   mounted() {
     let vm = this;

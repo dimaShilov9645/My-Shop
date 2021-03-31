@@ -1,6 +1,6 @@
 <template>
   <Header/>
-  <div class="padding main-wrapper">
+  <div class="main-wrapper">
     <router-view></router-view>
   </div>
   <Footer/>
@@ -24,10 +24,12 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .main-wrapper {
   flex: 1 0 auto;
-  max-width: 900px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   margin: 100px auto;
 }
 </style>

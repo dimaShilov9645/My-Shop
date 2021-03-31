@@ -35,28 +35,36 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 
 export default {
   name: "shop-header",
-  props: {},
-  data() {
-    return {
-      searchValue: '',
-      hover: false
+  data: () => ({ hover: false }),
+  computed: {
+    ...mapGetters("sortedProducts", ["filtered"]),
+    searchValue: {
+      get () {
+        return this.$store.state.sortedProducts.searchValue
+      },
+      set (value) {
+        this.$store.commit('sortedProducts/SET_SEARCH_VALUE', value)
+      }
     }
   },
   methods: {
+    ...mapActions("sortedProducts", ["getSortProducts"]),
     search(value) {
       if (value) {
-        this.GET_SEARCH_VALUE_TO_VUEX(value);
-        this.searchValue = '';
+        this.$store.commit('sortedProducts/SET_CATEGORY', '');
+        this.$store.commit('sortedProducts/SET_SUBCATEGORY', '');
+        this.$store.commit('sortedProducts/SET_MAX_PRICE', 5000);
+        this.$store.commit('sortedProducts/SET_MIN_PRICE', 0);
+        this.$store.commit('sortedProducts/SET_SIZE', 'All');
+        this.$store.commit('sortedProducts/SET_TYPE', 'All');
+        this.getSortProducts();
         this.$router.push('/catalog')
       }
-    },
-    ...mapActions([
-      'GET_SEARCH_VALUE_TO_VUEX'
-    ])
+    }
   }
 }
 </script>

@@ -1,9 +1,6 @@
 <template>
   <div class="flex align between padding-2 font-18 cart-item">
-    <img
-        class="cart-item__image"
-        :src="itemImageCart"
-        alt="img">
+    <img class="cart-item__image" :src="itemImageCart" alt="img" />
     <div class="flex between cart-item__info">
       <div class="bold-600">
         <p>Article:</p>
@@ -24,7 +21,12 @@
         <span class="font-18 quantity__btn btn" @click="incrementItem">+</span>
       </div>
     </div>
-    <button class="border-none padding font-18 border-radius cart-item__btn btn" @click="deleteFromCart">Delete</button>
+    <button
+      class="border-none padding font-18 border-radius cart-item__btn btn"
+      @click="deleteFromCart"
+    >
+      Delete
+    </button>
   </div>
 </template>
 
@@ -34,38 +36,35 @@ export default {
   props: {
     cart_item_data: {
       type: Object,
-      default() {
-        return {}
-      }
-    }
+      default: () => {},
+    },
   },
   computed: {
     itemImageCart() {
       const fileName = this.cart_item_data.category.toLowerCase();
-      return require(`../../assets/images/${fileName}/`+this.cart_item_data.image);
-    }
+      return require(`../../assets/images/${fileName}/` +
+        this.cart_item_data.image);
+    },
   },
   methods: {
     deleteFromCart() {
-      this.$emit('deleteFromCart')
+      this.$emit("deleteFromCart");
     },
     decrementItem() {
-      this.$emit('decrement')
+      this.$emit("decrement");
     },
     incrementItem() {
-      this.$emit('increment')
+      this.$emit("increment");
     },
   },
-  mounted() {
-  }
-}
+};
 </script>
 
 <style lang="scss">
 .cart-item {
   flex-wrap: nowrap;
   box-shadow: 0 0 8px 0 #2c3e50;
-  margin-bottom: $margin*2;
+  margin-bottom: $margin * 2;
 
   &__image {
     max-width: 150px;
